@@ -60,14 +60,17 @@ public class Computer {
     }
 
     public boolean infect() {
-        worms++;
+        worms = worms+1;
         if (!vulnerable)
             return false;
         if (worms == 1){
             this.setColor(Color.ORANGE);
-        } else {
+        } else if(worms > 1){
             this.setColor(Color.RED);
         }
+        else{
+            this.setColor(Color.BLACK);
+        }            
         return true;
     }
     
@@ -78,14 +81,14 @@ public class Computer {
     }
     
     
-        public void paintComputer(Graphics g) {
-            
-            g.setColor(color);
-            g.fillRect(pos_x, pos_y, COMP, COMP);
-            g.setColor(Color.BLACK);
-            g.drawRect(pos_x, pos_y, COMP, COMP); 
-            
-        }
+    public void paintComputer(Graphics g) {
+
+        g.setColor(color);
+        g.fillRect(pos_x, pos_y, COMP, COMP);
+        g.setColor(Color.BLACK);
+        g.drawRect(pos_x, pos_y, COMP, COMP); 
+
+    }
 
     
 }
