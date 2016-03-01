@@ -287,8 +287,8 @@ class Network extends JPanel {
         Random rand = new Random();
         int spreadRate;
         int infected = 1;
-        float reinfLimit;
-        float current = infected/10000; //patient zero
+        int reinfLimit;
+        int current = (int)((float)(infected/10000) * 100) ; //patient zero
         int pos_x = 5;
         int pos_y = 4;
         
@@ -300,7 +300,7 @@ class Network extends JPanel {
         public void runTest(int spreadRate, int reinfectionRate) {
             
             this.spreadRate = spreadRate;
-            reinfLimit = (float) (reinfectionRate / 100);
+            reinfLimit = reinfectionRate;
             
             //For now, make computer 0,0 patient zero
             comps[0][0].infect();
@@ -381,39 +381,42 @@ class Network extends JPanel {
         
         public void spread(Computer victim) {
             //recursive call to spread worm
-            int i=0;
-            while (i< spreadRate) {
+            
+            try { //Give the processor a breather
+                            Thread.sleep(1);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+            for (int i = 0; i < spreadRate; i++) {
                 int x = rand.nextInt(100);
                 int y = rand.nextInt(100);
-                if (comps[x][y].getWorms() == 0 && comps[x][y].infect()) { //clean computer
-                    infected++;
-                    current = infected/1000;
-                    //paint it!
-//                    repaint(comps[x][y].getPos_x(),
-//                            comps[x][y].getPos_y(),
-//                            comps[x][y].COMP,
-//                            comps[x][y].COMP);
-
-                    //recursive call to this computer
-                    spread(comps[x][y]);
-                    continue;
-                }
-                if (comps[x][y].getWorms() > 0 && current < reinfLimit) { //lies within reinfection limit
-                    if (comps[x][y].infect()){
+                
+                if (comps[x][y].getWorms() < 100){
+                    if (comps[x][y].getWorms() == 0 && comps[x][y].infect() && current < reinfLimit) { //clean computer
                         infected++;
-                        current = infected/10000;
-                        
-                        //paint it!
-//                        repaint(comps[x][y].getPos_x(),
-//                            comps[x][y].getPos_y(),
-//                            comps[x][y].COMP,
-//                            comps[x][y].COMP);
-                    
+                        current = (int)((float)(infected/10000) * 100);
+
+                        //recursive call to this computer
                         spread(comps[x][y]);
-                        
+                        continue;
+                    }
+                    if (comps[x][y].getWorms() > 0 && current < reinfLimit) { //lies within reinfection limit
+                        if (comps[x][y].infect()){
+                            infected++;
+                            current = (int)((float)(infected/10000) * 100);
+
+                            //paint it!
+    //                        repaint(comps[x][y].getPos_x(),
+    //                            comps[x][y].getPos_y(),
+    //                            comps[x][y].COMP,
+    //                            comps[x][y].COMP);
+
+                            spread(comps[x][y]);
+
+                        }
                     }
                 }
-                i++;
+                
                 //else infection failed to stick
             }
         }
@@ -435,7 +438,6 @@ class Network extends JPanel {
             }
 //            machine.paintComputer(g);
             
-            g.drawString("Testing...", 20, 20);
-            g.drawRect(200, 200, 200, 200);
+            
         }
     }
