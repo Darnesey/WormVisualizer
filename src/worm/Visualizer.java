@@ -381,8 +381,8 @@ class Network extends JPanel {
         
         public void spread(Computer victim) {
             //recursive call to spread worm
-            
-            for (int i = 0; i < spreadRate; i++) {
+            int i=0;
+            while (i< spreadRate) {
                 int x = rand.nextInt(100);
                 int y = rand.nextInt(100);
                 if (comps[x][y].getWorms() == 0 && comps[x][y].infect()) { //clean computer
@@ -413,6 +413,7 @@ class Network extends JPanel {
                         
                     }
                 }
+                i++;
                 //else infection failed to stick
             }
         }

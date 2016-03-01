@@ -56,7 +56,7 @@ public class Computer {
     
     public void protect() {
         vulnerable = false;
-        this.setColor(Color.BLACK);
+        this.setColor(Color.GREEN);
     }
 
     public boolean infect() {
