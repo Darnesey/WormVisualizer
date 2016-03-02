@@ -240,6 +240,8 @@ class Network extends JPanel {
         int current = (int)((float)(infected/10000) * 100); //patient zero
         int pos_x = 5;
         int pos_y = 4;
+        int x = rand.nextInt(100);
+        int y = rand.nextInt(100);
         
         
         public Network() {
@@ -347,15 +349,14 @@ class Network extends JPanel {
         
         public void spread(Computer victim) {
             //recursive call to spread worm
-            
             try { //Give the processor a breather
                             Thread.sleep(1);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
                         }
-            for (int i = 0; i < spreadRate; i++) {                
-                int x = rand.nextInt(100);
-                int y = rand.nextInt(100);
+            for (int i = 0; i < spreadRate; i++) {       
+                x = rand.nextInt(100);
+                y = rand.nextInt(100);
                 if (comps[x][y].getWorms() < 101){
                     if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
                         infected++;
