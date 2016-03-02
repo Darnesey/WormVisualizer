@@ -12,6 +12,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -233,6 +234,7 @@ class Network extends JPanel {
         JPanel subLayout;
         Computer machine = new Computer();
         Computer[][] comps = new Computer[100][100];
+        ArrayList<Computer> worming = new ArrayList<>();
         Random rand = new Random();
         int spreadRate;
         int infected = 1;
@@ -348,45 +350,27 @@ class Network extends JPanel {
         }
         
         public void spread(Computer victim) {
-            //recursive call to spread worm
-            try { //Give the processor a breather
-                            Thread.sleep(1);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-            for (int i = 0; i < spreadRate; i++) {       
-                x = rand.nextInt(100);
-                y = rand.nextInt(100);
+            while(comps[x][y].getWorms() < 101) {       
                 if (comps[x][y].getWorms() < 101){
                     if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
                         infected++;
                         current = (int)((infected/10000) * 100);
-
-                        //recursive call to this computer
-                        //spread(comps[x][y]);
-                            spread(comps[x][y]);
-                            
+                        worming.add(comps[x][y]);                   
                         continue;
                     }
                     if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
                         if (comps[x][y].infect()){
                             infected++;
+                            worming.add(comps[x][y]); 
                             current = (int)((infected/10000) * 100);
 
-                            //paint it!
-    //                        repaint(comps[x][y].getPos_x(),
-    //                            comps[x][y].getPos_y(),
-    //                            comps[x][y].COMP,
-    //                            comps[x][y].COMP);
-                            //spread(comps[x][y]);
-                            spread(comps[x][y]);
 
                         }
                     }
+                }  
+                x = rand.nextInt(100);
+                y = rand.nextInt(100);                    
                 }
-                
-                //else infection failed to stick
-            }
         }
         
         public void paint(Color color, int[] box){
