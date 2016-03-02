@@ -356,14 +356,16 @@ class Network extends JPanel {
                     if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
                         infected++;
                         current = (int)((infected/10000) * 100);
-                        worming.add(comps[x][y]);                   
+                        if(worming.indexOf(comps[x][y]) == 0)
+                            worming.add(comps[x][y]);                   
                         continue;
                     }
                     if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
                         //if (comps[x][y].infect()){
                             infected++;
                             current = (int)((infected/10000) * 100);
-                            worming.add(comps[x][y]); 
+                            if(worming.indexOf(comps[x][y]) == 0)
+                                worming.add(comps[x][y]); 
                         //}
                     }
                 }  
