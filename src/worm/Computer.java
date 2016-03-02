@@ -16,15 +16,16 @@ import javax.swing.JPanel;
 public class Computer {
     int pos_x = 5;
     int pos_y = 4;
+    int square_x;
+    int square_y;
     final int COMP = 5;
     Color color = Color.WHITE;
     int worms = 0;
     boolean vulnerable = true;
-//    public Computer(int pos_x, int pos_y){
-//        this.pos_x = pos_x;
-//        this.pos_y = pos_y;
-//        
-//    }
+    public Computer(int x, int y){
+        square_x = x;
+        square_y = y;
+    }
 
     public void setPos_x(int pos_x) {
         this.pos_x = pos_x;
@@ -60,20 +61,24 @@ public class Computer {
     }
 
     public boolean infect() {
-        if (worms < 101) {
+               
+        //Protection
+        if (!vulnerable)
+            return false;
+        
+        if (worms <= 100) { //still kicking
             worms++;
-        } else {
+        } else { //computer crashed
             return false;
         }
         
-        if (!vulnerable)
-            return false;
+        //Infection Levels
         if (worms == 1){
             this.setColor(Color.ORANGE);
         } else if (worms < 50) {
-            this.setColor(Color.BLUE);
-        } else if (worms < 100){
             this.setColor(Color.RED);
+        } else if (worms < 100){
+            this.setColor(Color.BLUE);
         } else {
             this.setColor(Color.BLACK);
         }

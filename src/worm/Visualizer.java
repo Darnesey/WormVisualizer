@@ -8,11 +8,11 @@ package worm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -232,9 +232,8 @@ public class Visualizer extends javax.swing.JFrame {
 
 class Network extends JPanel {
         JPanel subLayout;
-        Computer machine = new Computer();
+        Computer machine = new Computer(0,0);
         Computer[][] comps = new Computer[100][100];
-        ArrayList<Computer> worming = new ArrayList<>();
         Random rand = new Random();
         int spreadRate;
         int infected = 1;
@@ -244,6 +243,7 @@ class Network extends JPanel {
         int pos_y = 4;
         int x = rand.nextInt(100);
         int y = rand.nextInt(100);
+        ArrayList<Computer> list = new ArrayList<>();
         
         
         public Network() {
@@ -260,7 +260,8 @@ class Network extends JPanel {
             reinfLimit = reinfectionRate;
             
             //For now, make computer 0,0 patient zero
-            comps[0][0].infect();
+            comps[0][0].clean();
+            list.add(comps[0][0]);
             //Pause... for effect...
             try {
                 Thread.sleep(1500);
@@ -268,7 +269,7 @@ class Network extends JPanel {
                 Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            spread(comps[0][0]);
+            spread();
             repaint();
             
         }
@@ -285,7 +286,7 @@ class Network extends JPanel {
                             machine.COMP, machine.COMP);
                     
                     pos_x += 10;
-                    machine = new Computer();
+                    machine = new Computer(i,j);
                 }
                 pos_x = 5; //reset width
                 pos_y += 9;
@@ -340,45 +341,104 @@ class Network extends JPanel {
             repaint();
         }
         
-        public void infect(int[] victim) {
-            comps[victim[0]][victim[1]].infect();
+        public boolean infect(Computer victim) {
             
-            repaint(comps[victim[0]][victim[1]].getPos_x(),
-                    comps[victim[0]][victim[1]].getPos_y(),
-                    comps[victim[0]][victim[1]].COMP,
-                    comps[victim[0]][victim[1]].COMP);
+            if(victim.infect()){
+//                repaint(victim.getPos_x(),
+//                    victim.getPos_y(),
+//                    victim.COMP,
+//                    victim.COMP);
+                return true;
+            } else
+                return false;
         }
         
-        public void spread(Computer victim) {
-            int i = (int)Math.random()*1000;
-            while(i < spreadRate && worming.size() < infected) {     
-                if (comps[x][y].getWorms() < 101){
-                    if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
-                        infected++;
-                        current = (int)((infected/10000) * 100);
-                        if(worming.indexOf(comps[x][y]) == 0)
-                            worming.add(comps[x][y]);                   
-                        continue;
+        public void spread() {
+            
+            Computer attacker;
+            int x;
+            int y;
+            int coorX;
+            int coorY;
+            int shift = 1;
+            
+            while (!list.isEmpty()) {
+                attacker = list.remove(0);
+                x = attacker.square_x;
+                y = attacker.square_y;
+                int count = 0;
+                count++;
+                if (count == 2) {
+                    count++;
+                }
+                
+                
+                for (int i = 0; i < spreadRate; i++) {
+                    coorX = rand.nextInt(100);
+                    coorY = rand.nextInt(100);
+                    if (coorX == x && coorY == y) { //shift to following computers to save run time
+                        coorX = (coorX + shift) % 100;
+                        shift++;
                     }
-                    if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
-                        //if (comps[x][y].infect()){
-                            infected++;
-                            current = (int)((infected/10000) * 100);
-                            if(worming.indexOf(comps[x][y]) == 0)
-                                worming.add(comps[x][y]); 
-                        //}
+                    if (attacker.getWorms() == 0 || attacker.getWorms() >= 1 && current < reinfLimit){ //check reinfection limit
+                        if (comps[coorX][coorY].infect()) { //try to infect, and then spread
+                            list.add(comps[coorX][coorY]);
+                            current = ((infected/10000) * 100);
+                        }
                     }
-                }  
-                if(worming.indexOf(comps[x][y]) != 0 && comps[x][y].getWorms() > 100){
-                   worming.remove(comps[x][y]);
                 }
-                if(worming.isEmpty()){
-                   return;
-                }
-                x = rand.nextInt(100);
-                y = rand.nextInt(100);  
-                i = (int)Math.random()*1000;
-                }
+                
+                
+            }
+            
+            
+            
+            
+            
+            //recursive call to spread worm
+//            try { //Give the processor a breather
+//                            Thread.sleep(1);
+//                        } catch (InterruptedException ex) {
+//                            Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//            for (int i = 0; i < spreadRate; i++) {       
+//                x = rand.nextInt(100);
+//                y = rand.nextInt(100);
+//                if (comps[x][y].getWorms() < 101){
+//                    if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
+//                        infected++;
+//                        current = (int)((infected/10000) * 100);
+//
+//                        //recursive call to this computer
+//                        //spread(comps[x][y]);
+//                        repaint(comps[x][y].getPos_x(),
+//                                comps[x][y].getPos_y(),
+//                                comps[x][y].COMP,
+//                                comps[x][y].COMP);
+//                        
+//                            spread(comps[x][y]);
+//                            
+//                        continue;
+//                    }
+//                    if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
+//                        if (comps[x][y].infect()){
+//                            infected++;
+//                            current = (int)((infected/10000) * 100);
+//
+//                            //paint it!
+//                            repaint(comps[x][y].getPos_x(),
+//                                comps[x][y].getPos_y(),
+//                                comps[x][y].COMP,
+//                                comps[x][y].COMP);
+//                            //spread(comps[x][y]);
+//                            spread(comps[x][y]);
+//
+//                        }
+//                    }
+//                }
+//                
+//                //else infection failed to stick
+//            }
         }
         
         public void paint(Color color, int[] box){
