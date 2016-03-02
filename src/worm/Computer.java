@@ -71,9 +71,9 @@ public class Computer {
         if (worms == 1){
             this.setColor(Color.ORANGE);
         } else if (worms < 50) {
-            this.setColor(Color.RED);
-        } else if (worms < 100){
             this.setColor(Color.BLUE);
+        } else if (worms < 100){
+            this.setColor(Color.RED);
         } else {
             this.setColor(Color.BLACK);
         }

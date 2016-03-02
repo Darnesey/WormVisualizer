@@ -1,2 +1,0 @@
-worm.Network
-worm.Visualizer
