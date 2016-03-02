@@ -364,13 +364,13 @@ class Network extends JPanel {
 
                         //recursive call to this computer
                         spread(comps[x][y]);
-                        spread(comps[x+1][y]);
+                        /*spread(comps[x+1][y]);
                         spread(comps[x-1][y]);
                         spread(comps[x][y+1]);
-                        spread(comps[x][y-1]);
+                        spread(comps[x][y-1]);*/
                         continue;
                     }
-                    if (comps[x][y].getWorms() > 0 && current < reinfLimit) { //lies within reinfection limit
+                    if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
                         if (comps[x][y].infect()){
                             infected++;
                             current = (int)((infected/10000) * 100);
@@ -381,10 +381,10 @@ class Network extends JPanel {
     //                            comps[x][y].COMP,
     //                            comps[x][y].COMP);
                             spread(comps[x][y]);
-                            spread(comps[x+1][y]);
+                            /*spread(comps[x+1][y]);
                             spread(comps[x-1][y]);
                             spread(comps[x][y+1]);
-                            spread(comps[x][y-1]);
+                            spread(comps[x][y-1]);*/
 
                         }
                     }
