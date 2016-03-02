@@ -240,8 +240,6 @@ class Network extends JPanel {
         int current = (int)((float)(infected/10000) * 100); //patient zero
         int pos_x = 5;
         int pos_y = 4;
-        int x = rand.nextInt(100);
-        int y = rand.nextInt(100);
         
         
         public Network() {
@@ -355,19 +353,18 @@ class Network extends JPanel {
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
                         }
-            for (int i = 0; i < spreadRate; i++) {
-                
+            for (int i = 0; i < spreadRate; i++) {                
+                int x = rand.nextInt(100);
+                int y = rand.nextInt(100);
                 if (comps[x][y].getWorms() < 101){
                     if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
                         infected++;
                         current = (int)((infected/10000) * 100);
 
                         //recursive call to this computer
-                        spread(comps[x][y]);
-                        /*spread(comps[x+1][y]);
-                        spread(comps[x-1][y]);
-                        spread(comps[x][y+1]);
-                        spread(comps[x][y-1]);*/
+                        //spread(comps[x][y]);
+                            spread(comps[x][y]);
+                            
                         continue;
                     }
                     if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
@@ -380,11 +377,8 @@ class Network extends JPanel {
     //                            comps[x][y].getPos_y(),
     //                            comps[x][y].COMP,
     //                            comps[x][y].COMP);
+                            //spread(comps[x][y]);
                             spread(comps[x][y]);
-                            /*spread(comps[x+1][y]);
-                            spread(comps[x-1][y]);
-                            spread(comps[x][y+1]);
-                            spread(comps[x][y-1]);*/
 
                         }
                     }
