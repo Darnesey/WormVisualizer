@@ -25,7 +25,7 @@ public class Visualizer extends javax.swing.JFrame {
     
     Network test = new Network();
     int reinfectionLevels = 50;
-    int spreadRate = 10;
+    int spreadRate = 50;
     int notVulnerable = 1000;
     
     public Visualizer() {
@@ -47,17 +47,10 @@ public class Visualizer extends javax.swing.JFrame {
         environment = test;
         reinfected = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         wormReproduction = new javax.swing.JSlider();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         vulnerables = new javax.swing.JSlider();
         jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         simulate = new javax.swing.JButton();
         cleanScreen = new javax.swing.JButton();
 
@@ -74,6 +67,7 @@ public class Visualizer extends javax.swing.JFrame {
 
         reinfected.setMajorTickSpacing(50);
         reinfected.setMinorTickSpacing(10);
+        reinfected.setPaintLabels(true);
         reinfected.setPaintTicks(true);
         reinfected.setSnapToTicks(true);
         reinfected.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -84,30 +78,24 @@ public class Visualizer extends javax.swing.JFrame {
 
         jLabel1.setText("Reinfection Probability (%)");
 
-        jLabel2.setText("0");
-
-        jLabel3.setText("50");
-
-        jLabel4.setText("100");
-
         jLabel5.setText("Spread Rate per Worm");
 
-        wormReproduction.setMajorTickSpacing(10);
-        wormReproduction.setMaximum(20);
-        wormReproduction.setMinorTickSpacing(5);
+        wormReproduction.setMajorTickSpacing(100);
+        wormReproduction.setMaximum(500);
+        wormReproduction.setMinorTickSpacing(50);
+        wormReproduction.setPaintLabels(true);
         wormReproduction.setPaintTicks(true);
-        wormReproduction.setValue(10);
+        wormReproduction.setValue(50);
         wormReproduction.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 wormReproductionMouseReleased(evt);
             }
         });
 
-        jLabel6.setText("0");
-
-        jLabel8.setText("20");
-
+        vulnerables.setMajorTickSpacing(5000);
         vulnerables.setMaximum(10000);
+        vulnerables.setPaintLabels(true);
+        vulnerables.setPaintTicks(true);
         vulnerables.setValue(9000);
         vulnerables.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -116,10 +104,6 @@ public class Visualizer extends javax.swing.JFrame {
         });
 
         jLabel9.setText("Number of Computers Vulnerable");
-
-        jLabel11.setText("0");
-
-        jLabel12.setText("10,000");
 
         simulate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         simulate.setText("Run Test");
@@ -145,27 +129,12 @@ public class Visualizer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(85, 85, 85)
-                                .addComponent(jLabel3)
-                                .addGap(75, 75, 75)
-                                .addComponent(jLabel4))
                             .addComponent(reinfected, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(wormReproduction, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vulnerables, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(172, 172, 172)
-                                .addComponent(jLabel8))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel12))
-                                .addComponent(vulnerables, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(31, 31, 31)
-                                    .addComponent(simulate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(31, 31, 31)
+                                .addComponent(simulate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel5))
@@ -189,27 +158,14 @@ public class Visualizer extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(reinfected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(71, 71, 71)
+                .addGap(96, 96, 96)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(wormReproduction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addGap(74, 74, 74)
+                .addGap(99, 99, 99)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(vulnerables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cleanScreen)
                 .addGap(103, 103, 103)
@@ -226,7 +182,7 @@ public class Visualizer extends javax.swing.JFrame {
 
     private void simulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateActionPerformed
         // TODO add your handling code here:
-        test.runTest(spreadRate, reinfectionLevels);
+        test.runTest(spreadRate, reinfectionLevels, notVulnerable);
     }//GEN-LAST:event_simulateActionPerformed
 
     private void vulnerablesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vulnerablesMouseReleased
@@ -260,14 +216,7 @@ public class Visualizer extends javax.swing.JFrame {
     private javax.swing.JButton cleanScreen;
     public javax.swing.JPanel environment;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSlider reinfected;
     private javax.swing.JButton simulate;
@@ -288,7 +237,7 @@ class Network extends JPanel {
         int spreadRate;
         int infected = 1;
         int reinfLimit;
-        int current = (int)((float)(infected/10000) * 100) ; //patient zero
+        int current = (int)((float)(infected/10000) * 100); //patient zero
         int pos_x = 5;
         int pos_y = 4;
         
@@ -297,7 +246,11 @@ class Network extends JPanel {
             drawNetwork();
         }
         
-        public void runTest(int spreadRate, int reinfectionRate) {
+        public void runTest(int spreadRate, int reinfectionRate, int notVulnerable) {
+            //clean tester
+            cleanNotGreen();
+            
+            
             
             this.spreadRate = spreadRate;
             reinfLimit = reinfectionRate;
@@ -360,11 +313,25 @@ class Network extends JPanel {
         }
         
         public void clean() {
+            infected = 1;
+            current = (int)((float)(infected/10000) * 100);
             for (int i = 0; i < 100; i++) {
                 for (int j = 0; j < 100; j++) {
                     comps[i][j].clean();
 //                    repaint(comps[i][j].getPos_x(), comps[i][j].getPos_y(),
 //                            comps[i][j].COMP, comps[i][j].COMP);
+                }
+            }
+            repaint();
+        }
+        private void cleanNotGreen() {
+            infected = 1;
+            current = (int)((float)(infected/10000) * 100);
+            for (int i = 0; i < 100; i++) {
+                for (int j = 0; j < 100; j++) {
+                    if (comps[i][j].color != Color.GREEN) {
+                        comps[i][j].clean();
+                    }
                 }
             }
             repaint();
@@ -391,10 +358,10 @@ class Network extends JPanel {
                 int x = rand.nextInt(100);
                 int y = rand.nextInt(100);
                 
-                if (comps[x][y].getWorms() < 100){
-                    if (comps[x][y].getWorms() == 0 && comps[x][y].infect() && current < reinfLimit) { //clean computer
+                if (comps[x][y].getWorms() < 101){
+                    if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
                         infected++;
-                        current = (int)((float)(infected/10000) * 100);
+                        current = (int)((infected/10000) * 100);
 
                         //recursive call to this computer
                         spread(comps[x][y]);
@@ -403,7 +370,7 @@ class Network extends JPanel {
                     if (comps[x][y].getWorms() > 0 && current < reinfLimit) { //lies within reinfection limit
                         if (comps[x][y].infect()){
                             infected++;
-                            current = (int)((float)(infected/10000) * 100);
+                            current = (int)((infected/10000) * 100);
 
                             //paint it!
     //                        repaint(comps[x][y].getPos_x(),
@@ -440,4 +407,6 @@ class Network extends JPanel {
             
             
         }
+
+    
     }

@@ -60,7 +60,7 @@ public class Computer {
     }
 
     public boolean infect() {
-        if (worms < 100) {
+        if (worms < 101) {
             worms++;
         } else {
             return false;
@@ -70,8 +70,10 @@ public class Computer {
             return false;
         if (worms == 1){
             this.setColor(Color.ORANGE);
-        } else if (worms < 100){
+        } else if (worms < 50) {
             this.setColor(Color.RED);
+        } else if (worms < 100){
+            this.setColor(Color.BLUE);
         } else {
             this.setColor(Color.BLACK);
         }
