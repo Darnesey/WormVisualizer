@@ -360,13 +360,19 @@ class Network extends JPanel {
                         continue;
                     }
                     if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
-                        if (comps[x][y].infect()){
+                        //if (comps[x][y].infect()){
                             infected++;
                             current = (int)((infected/10000) * 100);
                             worming.add(comps[x][y]); 
-                        }
+                        //}
                     }
                 }  
+                if(worming.indexOf(comps[x][y]) != 0 && comps[x][y].getWorms() > 100){
+                   worming.remove(comps[x][y]);
+                }
+                if(worming.isEmpty()){
+                   return;
+                }
                 x = rand.nextInt(100);
                 y = rand.nextInt(100);  
                 i = (int)Math.random()*1000;
