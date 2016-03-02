@@ -350,7 +350,8 @@ class Network extends JPanel {
         }
         
         public void spread(Computer victim) {
-            while(comps[x][y].getWorms() < 101) {       
+            int i = 0;
+            while(worming.size() < comps.length && i < spreadRate) {     
                 if (comps[x][y].getWorms() < 101){
                     if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
                         infected++;
@@ -361,15 +362,14 @@ class Network extends JPanel {
                     if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
                         if (comps[x][y].infect()){
                             infected++;
-                            worming.add(comps[x][y]); 
                             current = (int)((infected/10000) * 100);
-
-
+                            worming.add(comps[x][y]); 
                         }
                     }
                 }  
                 x = rand.nextInt(100);
-                y = rand.nextInt(100);                    
+                y = rand.nextInt(100);  
+                i++;
                 }
         }
         
