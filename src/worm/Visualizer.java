@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package worm;
+package worms;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -56,6 +56,7 @@ public class Visualizer extends javax.swing.JFrame {
         cleanScreen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Worms Visualizer");
         setBounds(new java.awt.Rectangle(0, 0, 1024, 700));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1024, 700));
@@ -86,7 +87,6 @@ public class Visualizer extends javax.swing.JFrame {
         wormReproduction.setMinorTickSpacing(50);
         wormReproduction.setPaintLabels(true);
         wormReproduction.setPaintTicks(true);
-        wormReproduction.setValue(50);
         wormReproduction.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 wormReproductionMouseReleased(evt);
@@ -128,26 +128,26 @@ public class Visualizer extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(simulate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(cleanScreen))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(reinfected, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(wormReproduction, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(vulnerables, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(simulate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel9))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(cleanScreen)))
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel9))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel1)))))
                 .addGap(18, 18, 18)
                 .addComponent(environment, javax.swing.GroupLayout.PREFERRED_SIZE, 1005, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -155,27 +155,27 @@ public class Visualizer extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(reinfected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(wormReproduction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(vulnerables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cleanScreen)
-                .addGap(103, 103, 103)
-                .addComponent(simulate, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(environment, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reinfected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wormReproduction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(vulnerables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cleanScreen)
+                .addGap(18, 18, 18)
+                .addComponent(simulate, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -237,8 +237,8 @@ class Network extends JPanel {
         Random rand = new Random();
         int spreadRate;
         int infected = 1;
-        int reinfLimit;
-        int current = (int)((float)(infected/10000) * 100); //patient zero
+        float reinfLimit;
+        float current = (float) (infected / 10000.0); //patient zero
         int pos_x = 5;
         int pos_y = 4;
         int x = rand.nextInt(100);
@@ -257,10 +257,11 @@ class Network extends JPanel {
             
             
             this.spreadRate = spreadRate;
-            reinfLimit = reinfectionRate;
+            reinfLimit = (float) (reinfectionRate / 100.0);
             
             //For now, make computer 0,0 patient zero
             comps[0][0].clean();
+            infect(comps[0][0]);
             list.add(comps[0][0]);
             //Pause... for effect...
             try {
@@ -298,39 +299,34 @@ class Network extends JPanel {
             
             int x;
             int y;
-            
             //Clear Screen
             clean();
             
             for (int i = 0; i < protection; i++) {
-                
                 do {
                     x = rand.nextInt(100);
                     y = rand.nextInt(100);
                 } while (comps[x][y].getColor().equals(Color.GREEN));
                     comps[x][y].protect();
-                
-//                repaint(comps[x][y].getPos_x(), comps[x][y].getPos_y(),
-//                        comps[x][y].COMP, comps[x][y].COMP);
             }
             repaint();
         }
         
         public void clean() {
             infected = 1;
-            current = (int)((float)(infected/10000) * 100);
+            current = infected / 10000;
             for (int i = 0; i < 100; i++) {
                 for (int j = 0; j < 100; j++) {
                     comps[i][j].clean();
-//                    repaint(comps[i][j].getPos_x(), comps[i][j].getPos_y(),
-//                            comps[i][j].COMP, comps[i][j].COMP);
+
                 }
             }
             repaint();
         }
+        
         private void cleanNotGreen() {
             infected = 1;
-            current = (int)((float)(infected/10000) * 100);
+            current = infected / 10000;
             for (int i = 0; i < 100; i++) {
                 for (int j = 0; j < 100; j++) {
                     if (comps[i][j].color != Color.GREEN) {
@@ -344,10 +340,8 @@ class Network extends JPanel {
         public boolean infect(Computer victim) {
             
             if(victim.infect()){
-//                repaint(victim.getPos_x(),
-//                    victim.getPos_y(),
-//                    victim.COMP,
-//                    victim.COMP);
+                
+                repaint();
                 return true;
             } else
                 return false;
@@ -366,11 +360,6 @@ class Network extends JPanel {
                 attacker = list.remove(0);
                 x = attacker.square_x;
                 y = attacker.square_y;
-                int count = 0;
-                count++;
-                if (count == 2) {
-                    count++;
-                }
                 
                 
                 for (int i = 0; i < spreadRate; i++) {
@@ -383,69 +372,14 @@ class Network extends JPanel {
                     if (attacker.getWorms() == 0 || attacker.getWorms() >= 1 && current < reinfLimit){ //check reinfection limit
                         if (comps[coorX][coorY].infect()) { //try to infect, and then spread
                             list.add(comps[coorX][coorY]);
-                            current = ((infected/10000) * 100);
+                            infected++;
+                            current = (float) (infected / 10000.0);
                         }
                     }
                 }
-                
-                
             }
-            
-            
-            
-            
-            
-            //recursive call to spread worm
-//            try { //Give the processor a breather
-//                            Thread.sleep(1);
-//                        } catch (InterruptedException ex) {
-//                            Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//            for (int i = 0; i < spreadRate; i++) {       
-//                x = rand.nextInt(100);
-//                y = rand.nextInt(100);
-//                if (comps[x][y].getWorms() < 101){
-//                    if (comps[x][y].getWorms() == 0 && current < reinfLimit && comps[x][y].infect()) { //clean computer
-//                        infected++;
-//                        current = (int)((infected/10000) * 100);
-//
-//                        //recursive call to this computer
-//                        //spread(comps[x][y]);
-//                        repaint(comps[x][y].getPos_x(),
-//                                comps[x][y].getPos_y(),
-//                                comps[x][y].COMP,
-//                                comps[x][y].COMP);
-//                        
-//                            spread(comps[x][y]);
-//                            
-//                        continue;
-//                    }
-//                    if (comps[x][y].getWorms() > 0 && current < reinfLimit && comps[x][y].infect()) { //lies within reinfection limit
-//                        if (comps[x][y].infect()){
-//                            infected++;
-//                            current = (int)((infected/10000) * 100);
-//
-//                            //paint it!
-//                            repaint(comps[x][y].getPos_x(),
-//                                comps[x][y].getPos_y(),
-//                                comps[x][y].COMP,
-//                                comps[x][y].COMP);
-//                            //spread(comps[x][y]);
-//                            spread(comps[x][y]);
-//
-//                        }
-//                    }
-//                }
-//                
-//                //else infection failed to stick
-//            }
         }
         
-        public void paint(Color color, int[] box){
-            //change color of current machine
-            comps[box[0]][box[1]].setColor(color);
-            
-        }
 
         @Override
         public void paintComponent(Graphics g) {
@@ -455,11 +389,7 @@ class Network extends JPanel {
                 for (int j = 0; j < 100; j++) {
                     comps[i][j].paintComputer(g);
                 }
-            }
-//            machine.paintComputer(g);
-            
-            
+            }        
         }
-
-    
+        
     }
